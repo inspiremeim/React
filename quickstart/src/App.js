@@ -24,7 +24,7 @@
 
 // export default App;
 
-//---------------Start JSX Script---------------//
+//---------------Start Script---------------//
 import { useState } from "react";
 import "./App.css";
 
@@ -157,4 +157,4 @@ export default function MyApp() {
     </div>
   );
 }
-//---------------End JSX Script---------------//
+//---------------End Script---------------//

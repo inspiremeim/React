@@ -24,7 +24,7 @@
 
 // export default App;
 
-//---------------Start JSX Script---------------//
+//---------------Start Script---------------//
 import { useState } from "react";
 
 function UserDiv({ Users, SearchText, IsUserActive }) {
@@ -169,4 +169,4 @@ var Users = [
 export default function MyApp() {
   return <MainDiv Users={Users} />;
 }
-//---------------End JSX Script---------------//
+//---------------End Script---------------//
