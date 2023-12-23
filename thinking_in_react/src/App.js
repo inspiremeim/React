@@ -25,30 +25,31 @@
 // export default App;
 
 //---------------Start JSX Script---------------//
+import { useState } from "react";
 
-function UserDiv({ Users }) {
-  const UserList = Users.map((data) => (
-    <tr>
-      <td style={{ border: "1px solid black" }} key={data.id}>
-        {data.id}
-      </td>
-      <td style={{ border: "1px solid black" }} key={data.id}>
-        {data.name}
-      </td>
-      <td style={{ border: "1px solid black" }} key={data.id}>
-        {data.username}
-      </td>
-      <td style={{ border: "1px solid black" }} key={data.id}>
-        {data.email}
-      </td>
-      <td style={{ border: "1px solid black" }} key={data.id}>
-        {data.phone}
-      </td>
-      <td style={{ border: "1px solid black" }} key={data.id}>
-        {data.status}
-      </td>
-    </tr>
-  ));
+function UserDiv({ Users, SearchText, IsUserActive }) {
+  const UserList = [];
+
+  Users.forEach((data) => {
+    if (data.name.toLowerCase().indexOf(SearchText.toLowerCase()) === -1) {
+      return;
+    }
+
+    if (IsUserActive && data.status === "False") {
+      return;
+    }
+
+    UserList.push(
+      <tr key={data.id}>
+        <td style={{ border: "1px solid black" }}>{data.id}</td>
+        <td style={{ border: "1px solid black" }}>{data.name}</td>
+        <td style={{ border: "1px solid black" }}>{data.username}</td>
+        <td style={{ border: "1px solid black" }}>{data.email}</td>
+        <td style={{ border: "1px solid black" }}>{data.phone}</td>
+        <td style={{ border: "1px solid black" }}>{data.status}</td>
+      </tr>
+    );
+  });
 
   return (
     <div style={{ border: "1px solid red", padding: "10px" }}>
@@ -59,36 +60,65 @@ function UserDiv({ Users }) {
           borderCollapse: "collapse",
         }}
       >
-        <tr>
-          <th style={{ border: "1px solid black" }}>Id</th>
-          <th style={{ border: "1px solid black" }}>Name</th>
-          <th style={{ border: "1px solid black" }}>Username</th>
-          <th style={{ border: "1px solid black" }}>Email</th>
-          <th style={{ border: "1px solid black" }}>Phone</th>
-          <th style={{ border: "1px solid black" }}>Active</th>
-        </tr>
-        {UserList}
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid black" }}>Id</th>
+            <th style={{ border: "1px solid black" }}>Name</th>
+            <th style={{ border: "1px solid black" }}>Username</th>
+            <th style={{ border: "1px solid black" }}>Email</th>
+            <th style={{ border: "1px solid black" }}>Phone</th>
+            <th style={{ border: "1px solid black" }}>Active</th>
+          </tr>
+        </thead>
+        <tbody>{UserList}</tbody>
       </table>
     </div>
   );
 }
 
-function SearchDiv() {
+function SearchDiv({
+  SearchText,
+  onSearchTextChange,
+  IsUserActive,
+  onIsUserActiveChange,
+}) {
   return (
     <div style={{ border: "1px solid blue", padding: "10px" }}>
-      <input type="text" aria-placeholder="Search..." />
+      <input
+        type="text"
+        placeholder="Search..."
+        value={SearchText}
+        onChange={(e) => onSearchTextChange(e.target.value)}
+      />
       <br />
-      <input type="checkbox" /> Only show those users who are active.
+      <input
+        type="checkbox"
+        checked={IsUserActive}
+        onChange={(e) => onIsUserActiveChange(e.target.checked)}
+      />{" "}
+      Only show those users who are active.
     </div>
   );
 }
 
 function MainDiv({ Users }) {
+  const [SearchText, setSearchText] = useState("");
+  const [IsUserActive, setIsUserActive] = useState(false);
+
   return (
     <div style={{ border: "1px solid grey", padding: "10px", width: "30%" }}>
-      <SearchDiv />
+      <SearchDiv
+        SearchText={SearchText}
+        onSearchTextChange={setSearchText}
+        IsUserActive={IsUserActive}
+        onIsUserActiveChange={setIsUserActive}
+      />
       <br />
-      <UserDiv Users={Users} />
+      <UserDiv
+        Users={Users}
+        SearchText={SearchText}
+        IsUserActive={IsUserActive}
+      />
     </div>
   );
 }
@@ -140,7 +170,3 @@ export default function MyApp() {
   return <MainDiv Users={Users} />;
 }
 //---------------End JSX Script---------------//
-
-//---------------Pending Points---------------//
-//Step 3: Find the minimal but complete representation of UI state
-//---------------Pending Points---------------//
