@@ -6,10 +6,9 @@ function main() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/blank" element={<Blank />} />
-        </Route>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/blank" element={<Blank />} />
       </Routes>
     </BrowserRouter>
   );

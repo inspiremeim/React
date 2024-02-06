@@ -6,7 +6,7 @@ import AppendScript from "../components/appendscript";
 
 function AddScript() {
   AppendScript("../template/vendor/jquery/jquery.min.js");
-  AppendScript("../template/vendor/bootstrap/js/bootstrap.bundle.min.js");
+  AppendScript("../template/vendor/bootstrap/js/bootstrap.min.js");
   AppendScript("../template/vendor/jquery-easing/jquery.easing.min.js");
   AppendScript("../template/js/sb-admin-2.min.js");
   AppendScript("../template/vendor/chart.js/Chart.min.js");

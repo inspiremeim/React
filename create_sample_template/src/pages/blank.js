@@ -2,6 +2,14 @@ import Navbar from "../components/navbar";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Common from "../components/common";
+import AppendScript from "../components/appendscript";
+
+function AddScript() {
+  AppendScript("../template/vendor/jquery/jquery.min.js");
+  AppendScript("../template/vendor/bootstrap/js/bootstrap.bundle.min.js");
+  AppendScript("../template/vendor/jquery-easing/jquery.easing.min.js");
+  AppendScript("../template/js/sb-admin-2.min.js");
+}
 
 function Blank() {
   return (
@@ -24,10 +32,7 @@ function Blank() {
 
       <Common />
 
-      <script src="../template/vendor/jquery/jquery.min.js"></script>
-      <script src="../template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="../template/vendor/jquery-easing/jquery.easing.min.js"></script>
-      <script src="../template/js/sb-admin-2.min.js"></script>
+      <AddScript />
     </>
   );
 }

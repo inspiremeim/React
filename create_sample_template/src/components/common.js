@@ -1,26 +1,26 @@
 function Common() {
   return (
     <>
-      <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
+      <a className="scroll-to-top rounded" href="#page-top">
+        <i className="fas fa-angle-up"></i>
       </a>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="logoutModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Ready to Leave?
               </h5>
               <button
-                class="close"
+                className="close"
                 type="button"
                 data-dismiss="modal"
                 aria-label="Close"
@@ -28,19 +28,19 @@ function Common() {
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               Select "Logout" below if you are ready to end your current
               session.
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 type="button"
                 data-dismiss="modal"
               >
                 Cancel
               </button>
-              <a class="btn btn-primary" href="login.html">
+              <a className="btn btn-primary" href="login.html">
                 Logout
               </a>
             </div>
