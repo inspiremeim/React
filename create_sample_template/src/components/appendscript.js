@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 
-function AppendScript(scriptToAppend) {
+function AppendScript(src) {
   useEffect(() => {
     const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = scriptToAppend;
+    script.src = src;
     script.async = true;
+    script.type = "text/javascript";
+    script.setAttribute("crossorigin", "anonymous");
     document.body.appendChild(script);
+
     return () => {
       document.body.removeChild(script);
     };
-  }, [scriptToAppend]);
+  }, [src]);
 }
 
 export default AppendScript;
