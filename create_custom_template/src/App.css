@@ -1,0 +1,27 @@
+nav,
+footer,
+section {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+nav,
+footer {
+  height: 100px;
+}
+
+nav {
+  top: 0;
+}
+
+section {
+  top: 100px;
+  bottom: 100px;
+  overflow: auto;
+  background: #ccc;
+}
+
+footer {
+  bottom: 0;
+}
