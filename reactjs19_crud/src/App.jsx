@@ -1,26 +1,25 @@
 import { useState } from "react";
-import SidebarForm from "./components/SideBarForm";
+import SidebarForm from "./components/SidebarForm";
 
 export default function App() {
   const [open, setOpen] = useState(false);
 
   const [formData, setFormData] = useState({
+    userType: "",
+    name: "",
     username: "",
     email: "",
-    mobileNumber: "",
-    firstName: "",
-    lastName: "",
     birthdate: "",
     gender: "",
+    country: "",
+    state: "",
+    city: "",
     address: "",
-    countryCode: "",
+    mobileNumber: "",
+    todo: "",
   });
 
   const openSidebar = () => {
-    // setFormData({
-    //   name: "Jon Snow",
-    //   email: "jon.snow@winterfell.com",
-    // });
     setOpen(true);
   };
 
@@ -33,12 +32,14 @@ export default function App() {
         Open Sidebar Form
       </button>
 
-      <SidebarForm
-        open={open}
-        setOpen={setOpen}
-        formData={formData}
-        setFormData={setFormData}
-      />
+      {open && (
+        <SidebarForm
+          open={open}
+          setOpen={setOpen}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
     </div>
   );
 }

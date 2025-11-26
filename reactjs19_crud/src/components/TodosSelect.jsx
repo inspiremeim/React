@@ -1,49 +1,50 @@
+import { useEffect, useState } from "react";
+import { getTodoList } from "../data/getTodoList.js";
 import Select from "react-select";
-import ReactCountryFlag from "react-country-flag";
-import { Country } from "country-state-city";
 
-export default function CountrySelect({ name, value, onChange }) {
-  const countries = Country.getAllCountries();
+export default function TodosSelect({ name, value, onChange }) {
+  const [options, setOptions] = useState([]);
 
-  const options = countries.map((c) => ({
-    value: c.isoCode,
-    label: c.name,
-  }));
+  useEffect(() => {
+    if (!value) {
+      const fetchTodos = async () => {
+        const Todos = await getTodoList();
+        if (Todos.length > 0) {
+          const opts = Todos.map((todo) => ({
+            value: todo.id,
+            label: todo.todo,
+          }));
+          setOptions(opts);
+        }
+      };
+      fetchTodos();
+    }
+  }, [value]);
 
   return (
     <Select
       name={name}
-      placeholder="Select a country"
+      placeholder={"Select a your favourite todo"}
       options={options}
-      formatOptionLabel={(option) => (
-        <div className="flex items-center gap-2">
-          <ReactCountryFlag
-            countryCode={option.value}
-            svg
-            style={{ width: "1.3em", height: "1.3em" }}
-          />
-          <span>{option.label}</span>
-        </div>
-      )}
       isSearchable={true}
       value={options.find((x) => x.value === value) || null}
       onChange={(selectedValue) =>
         onChange({ target: { name, value: selectedValue?.value || "" } })
       }
       styles={{
-        control: (base, country) => ({
+        control: (base, todo) => ({
           ...base,
           borderRadius: "0.75rem", // rounded-xl
           padding: "2px",
           minHeight: "42px",
-          borderColor: country.isFocused
+          borderColor: todo.isFocused
             ? "#3b82f6" // blue-500
             : "#d1d5db", // gray-300
-          boxShadow: country.isFocused
+          boxShadow: todo.isFocused
             ? "0 0 0 2px rgba(59, 130, 246, 0.4)" // ring-2 ring-blue-500/40
             : "none",
           "&:hover": {
-            borderColor: country.isFocused ? "#3b82f6" : "#9ca3af", // gray-400
+            borderColor: todo.isFocused ? "#3b82f6" : "#9ca3af", // gray-400
           },
         }),
         menu: (base) => ({

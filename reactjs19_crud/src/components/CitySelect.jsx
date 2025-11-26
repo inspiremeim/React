@@ -1,49 +1,39 @@
 import Select from "react-select";
-import ReactCountryFlag from "react-country-flag";
-import { Country } from "country-state-city";
+import { City } from "country-state-city";
 
-export default function CountrySelect({ name, value, onChange }) {
-  const countries = Country.getAllCountries();
+export default function CitySelect({ name, country, state, value, onChange }) {
+  const cities = country && state ? City.getCitiesOfState(country, state) : [];
 
-  const options = countries.map((c) => ({
-    value: c.isoCode,
+  const options = cities.map((c) => ({
+    value: c.name,
     label: c.name,
   }));
 
   return (
     <Select
       name={name}
-      placeholder="Select a country"
+      placeholder={country && state ? "Select a city" : "Select a state first"}
+      isDisabled={!country || !state}
       options={options}
-      formatOptionLabel={(option) => (
-        <div className="flex items-center gap-2">
-          <ReactCountryFlag
-            countryCode={option.value}
-            svg
-            style={{ width: "1.3em", height: "1.3em" }}
-          />
-          <span>{option.label}</span>
-        </div>
-      )}
       isSearchable={true}
       value={options.find((x) => x.value === value) || null}
       onChange={(selectedValue) =>
         onChange({ target: { name, value: selectedValue?.value || "" } })
       }
       styles={{
-        control: (base, country) => ({
+        control: (base, city) => ({
           ...base,
           borderRadius: "0.75rem", // rounded-xl
           padding: "2px",
           minHeight: "42px",
-          borderColor: country.isFocused
+          borderColor: city.isFocused
             ? "#3b82f6" // blue-500
             : "#d1d5db", // gray-300
-          boxShadow: country.isFocused
+          boxShadow: city.isFocused
             ? "0 0 0 2px rgba(59, 130, 246, 0.4)" // ring-2 ring-blue-500/40
             : "none",
           "&:hover": {
-            borderColor: country.isFocused ? "#3b82f6" : "#9ca3af", // gray-400
+            borderColor: city.isFocused ? "#3b82f6" : "#9ca3af", // gray-400
           },
         }),
         menu: (base) => ({
